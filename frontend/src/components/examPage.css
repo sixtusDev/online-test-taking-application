@@ -1,0 +1,33 @@
+.exam {
+  /* width: 1080px; */
+  /* margin: 3rem auto 3rem auto; */
+  /* padding: 1rem; */
+  /* background-image: linear-gradient(to bottom,
+    #0081c1, #2c7bc7, #4b73ca, #696ac8, #845ec2); */
+  /* display: flex; */
+  /* flex-direction: column; */
+  height: 100vh !important;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.exam__body {
+  display: flex;
+  min-height: 93.7vh;
+}
+
+.btn-next-submit {
+  margin-top: 3rem;
+  border: none;
+  outline: none;
+  background-color: #f44336;
+  height: 5rem;
+  color: #fff;
+  padding: 0 4rem;
+  font-size: 1.7rem;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+}

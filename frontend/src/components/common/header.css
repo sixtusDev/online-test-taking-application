@@ -1,0 +1,42 @@
+.exam__header {
+  background-color: #845ec2;
+  color: #fff;
+  display: flex;
+  padding-left: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exam__course-code,
+.exam__time {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.exam__time {
+  color: #f44336;
+  background-color: #fff;
+  letter-spacing: 0.5rem;
+  padding: 0 2rem;
+  display: flex;
+  align-self: stretch;
+}
+
+.btn-primary {
+  display: flex;
+  background-color: #000;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  letter-spacing: 0.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #f44336;
+  color: #fff;
+}

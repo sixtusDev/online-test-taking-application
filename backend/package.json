@@ -1,0 +1,22 @@
+{
+  "name": "cbt-backend",
+  "version": "1.0.0",
+  "description": "The backend of cbt app built using nodejs, expressjs, and mongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sixtus Innocent and Favour Maitera",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.4.0",
+    "joi-objectid": "^3.0.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.7",
+    "winston": "^3.3.3",
+    "winston-mongodb": "^5.0.7"
+  }
+}

@@ -1,0 +1,70 @@
+.exam__question-container {
+  background-color: #ebe3e3;
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+}
+
+.exam__question {
+  width: 60%;
+}
+
+.exam__question-no {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  background-color: #fff;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 4rem;
+  padding: 1.5rem;
+}
+
+.exam__question-text-box {
+  background-color: #fff;
+  padding: 3rem;
+}
+
+.exam__question-text-box,
+.exam__options-box {
+  width: 80%;
+  margin: 2rem auto 0 auto;
+  min-height: 30rem;
+  /* font-size: 1.4rem; */
+}
+
+.exam__options {
+  width: 40%;
+}
+
+.exam__options-box {
+  display: block;
+}
+
+.text-area {
+  padding: 2rem;
+  outline: 0;
+  border: 0;
+  font-size: 1.6rem;
+  border: 1px solid #845ec2;
+}
+
+.exam__option {
+  /* margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  cursor: pointer; */
+  display: none;
+}
+
+.exam__option-label {
+  display: block;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.active {
+  border: 1px solid #845ec2;
+}

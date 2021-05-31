@@ -1,0 +1,46 @@
+.exam__pagination {
+  background-color: #fff;
+  width: 25%;
+  /* height: 90vh; */
+
+  /* margin: 3rem auto 0 auto; */
+  /* padding-left: 1rem; */
+  /* overflow: hidden; */
+}
+
+.exam__no-box {
+  margin: 3rem auto 0 auto;
+  display: flex;
+  margin-left: 2rem;
+  flex-wrap: wrap;
+}
+
+.exam_no {
+  width: 40px;
+  height: 40px;
+  font-weight: 500;
+  border: 1px solid #ebe3e3;
+  display: inline-block;
+  border-radius: 50%;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.answered {
+  background-color: #f44336;
+  color: #fff;
+  border: 1px solid #f44336;
+}
+
+.current {
+  background-color: #845ec2;
+  color: #fff;
+  border: 1px solid #845ec2;
+}

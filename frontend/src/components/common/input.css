@@ -1,0 +1,14 @@
+.login-form__input {
+  width: 70%;
+  align-self: center;
+  background-color: #f1eeee;
+  height: 4rem;
+  margin-bottom: 2.5rem;
+  outline: none;
+  border: none;
+  padding-left: 2rem;
+  font-size: 1.7rem;
+  border-radius: 40px;
+  font-family: inherit;
+  font-weight: 500;
+}

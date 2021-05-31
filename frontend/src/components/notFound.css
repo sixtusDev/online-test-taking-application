@@ -1,0 +1,29 @@
+.not-found {
+  max-width: 60%;
+  background-color: #fff;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+}
+
+.not-found__heading {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.not-found__image {
+  width: 100%;
+}
+
+.not-found__text {
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+}

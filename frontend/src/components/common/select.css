@@ -1,0 +1,11 @@
+.select {
+  width: 70%;
+  outline: none;
+  border-radius: 100px;
+  height: 4rem;
+  color: inherit;
+  align-self: center;
+  font-size: 1.7rem;
+  margin-bottom: 2.5rem;
+  padding-left: 1.5rem;
+}
