@@ -40,3 +40,27 @@
   background-color: #f44336;
   color: #fff;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .exam__course-code,
+  .exam__time {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .exam__time {
+    color: #fff;
+    background-color: inherit;
+    align-self: center;
+  }
+
+  .btn-primary {
+    font-size: 1.5rem;
+    letter-spacing: 0;
+  }
+
+  .exam__course-code {
+    display: none;
+  }
+}

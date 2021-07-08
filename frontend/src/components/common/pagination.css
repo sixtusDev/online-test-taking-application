@@ -44,3 +44,11 @@
   color: #fff;
   border: 1px solid #845ec2;
 }
+
+/* Medium devices (tablets, 900px and down) */
+@media only screen and (max-width: 900px) {
+  .exam__pagination {
+    width: 100%;
+    height: 100%;
+  }
+}

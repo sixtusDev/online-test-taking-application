@@ -9,10 +9,11 @@ router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   const courses = await Course.find({ level: req.body.level });
-  console.log(courses);
   if (courses.length === 0)
     return res.status(404).send("No scheduled exam for your level yet");
-  const course = await Course.findOne({ courseCode: req.body.courseCode });
+  const course = await Course.findOne({
+    courseCode: req.body.courseCode,
+  });
   if (!course) return res.status(404).send("Course not found");
   const index = course.students.findIndex(
     (student) => student.idNumber === req.body.idNumber

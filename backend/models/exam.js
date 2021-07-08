@@ -3,17 +3,40 @@ const mongoose = require("mongoose");
 const examSchema = new mongoose.Schema({
   duration: Number,
   totalPoints: Number,
-  instruction: String,
+  instruction: {
+    type: String,
+    lowercase: true,
+  },
   pointPerQuestion: Number,
-  courseCode: String,
-  courseTitle: String,
+  courseCode: {
+    type: String,
+    lowercase: true,
+  },
+  courseTitle: {
+    type: String,
+    lowercase: true,
+  },
   courseUnit: Number,
   questions: [
     {
-      question: String,
-      options: [String],
-      answer: String,
-      questionType: String,
+      question: {
+        type: String,
+        lowercase: true,
+      },
+      options: [
+        {
+          type: String,
+          lowercase: true,
+        },
+      ],
+      answer: {
+        type: String,
+        lowercase: true,
+      },
+      questionType: {
+        type: String,
+        lowercase: true,
+      },
     },
   ],
 });

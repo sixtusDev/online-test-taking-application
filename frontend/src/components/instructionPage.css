@@ -88,3 +88,37 @@
   letter-spacing: 1.2px;
   word-spacing: 2.2px;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .course {
+    width: 95%;
+    padding: 2rem;
+  }
+
+  .course__code,
+  .course__unit,
+  .course__title {
+    font-size: 1.6rem;
+    word-spacing: 0;
+    letter-spacing: 0;
+  }
+
+  .course__instruction-box {
+    padding: 1.5rem;
+  }
+
+  .btn-start {
+    height: 3rem;
+    color: #fff;
+    padding: 0 2rem;
+    font-size: 1.3rem;
+    border-radius: 0;
+  }
+
+  .course__goodwill {
+    font-size: 1.5rem;
+    letter-spacing: 0;
+    word-spacing: 0;
+  }
+}

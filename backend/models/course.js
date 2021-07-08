@@ -1,12 +1,24 @@
 const mongoose = require("mongoose");
 
 const courseSchema = new mongoose.Schema({
-  courseCode: String,
-  courseTitle: String,
-  level: String,
+  courseCode: {
+    type: String,
+    lowercase: true,
+  },
+  courseTitle: {
+    type: String,
+    lowercase: true,
+  },
+  level: {
+    type: String,
+    lowercase: true,
+  },
   students: [
     {
-      idNumber: String,
+      idNumber: {
+        type: String,
+        lowercase: true,
+      },
       score: {
         type: Number,
         default: null,

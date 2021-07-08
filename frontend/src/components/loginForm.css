@@ -59,3 +59,18 @@
   align-self: center;
   margin-bottom: 2rem;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .login-form {
+    width: 90%;
+  }
+
+  .login-form__button {
+    width: 90%;
+  }
+
+  .message {
+    width: 90%;
+  }
+}

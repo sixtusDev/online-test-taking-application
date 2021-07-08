@@ -91,9 +91,14 @@ class LoginForm extends Component {
     if (errors) return null;
 
     const { account, courses } = this.state;
-    let idNumber = this.convertSlashBasedIdNumberToHyphen(account.idNumber);
-    idNumber = idNumber.toLowerCase();
-    const data = courses.find((data) => data.courseCode === account.courseCode);
+    let idNumber = this.convertSlashBasedIdNumberToHyphen(
+      account.idNumber
+    ).toLowerCase();
+    // idNumber = idNumber.toLowerCase();
+    const courseCode = account.courseCode.toLowerCase();
+    const data = courses.find(
+      (data) => data.courseCode.toLowerCase() === courseCode
+    );
     if (data) {
       const index = data.students.findIndex(
         (d) => d.idNumber.toLowerCase() === idNumber
@@ -104,14 +109,12 @@ class LoginForm extends Component {
         );
       try {
         const payload = {
-          courseCode: account.courseCode,
+          courseCode,
           level: account.level,
           idNumber,
         };
-        const result = await http.post(`${config.apiEndpoint}/start`, payload);
-        this.props.history.push(
-          `/instruction/${account.courseCode}/${idNumber}`
-        );
+        await http.post(`${config.apiEndpoint}/start`, payload);
+        this.props.history.push(`/instruction/${courseCode}/${idNumber}`);
       } catch (ex) {
         if (
           ex.response &&

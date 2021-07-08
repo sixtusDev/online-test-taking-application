@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import "./qestions.css";
 
 class Qestions extends Component {
+  renderClassName = (option, index) => {
+    const { currentPage, answers } = this.props;
+    const hasCommon = answers[currentPage - 1] === option;
+    if (hasCommon) return "exam__option-label active";
+    else return "exam__option-label";
+  };
   render() {
     const { questions, currentAnswer, buttonLabel, onAnswer, onNextAndSubmit } =
       this.props;
@@ -20,15 +26,16 @@ class Qestions extends Component {
                 <React.Fragment>
                   <div className="exam__question-no">Options</div>
                   <div className="exam__options-box">
-                    {question.options.map((option) => (
+                    {question.options.map((option, index) => (
                       <React.Fragment key={option}>
                         <label
                           htmlFor={option}
-                          className={
-                            option.toLowerCase() === currentAnswer
-                              ? "exam__option-label active"
-                              : "exam__option-label"
-                          }
+                          // className={
+                          //   option.toLowerCase() === currentAnswer
+                          //     ? "exam__option-label active"
+                          //     : "exam__option-label"
+                          // }
+                          className={this.renderClassName(option, index)}
                         >
                           {option}
                         </label>
@@ -48,7 +55,7 @@ class Qestions extends Component {
                 <React.Fragment>
                   <div className="exam__question-no">Type Answer Below</div>
                   <textarea
-                    defaultValue={currentAnswer}
+                    value={currentAnswer}
                     className="exam__options-box text-area"
                     name="answerbox"
                     id="answerbox"
@@ -64,6 +71,7 @@ class Qestions extends Component {
                 <button
                   className="btn-next-submit"
                   onClick={() => onNextAndSubmit()}
+                  onKeyDown={this.handleKeyDown}
                 >
                   {buttonLabel} &rarr;
                 </button>
@@ -71,22 +79,6 @@ class Qestions extends Component {
             </div>
           </div>
         ))}
-        {/* {question.options.map((option) => (
-                  <div
-                    key={option}
-                    className={
-                      currentAnswer === option.toLowerCase()
-                        ? "exam__option active"
-                        : "exam__option"
-                    }
-                    onClick={() => onAnswer(question, option)}
-                  >
-                    {option}
-                  </div>
-                  // <div className="exam__option">Data Structures</div>
-                  // <div className="exam__option">Algorithm</div>
-                  // <div className="exam__option">Dynamic Programming</div>
-                ))} */}
       </React.Fragment>
     );
   }

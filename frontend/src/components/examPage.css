@@ -14,6 +14,7 @@
 .exam__body {
   display: flex;
   min-height: 93.7vh;
+  background-color: #fff;
 }
 
 .btn-next-submit {
@@ -30,4 +31,26 @@
   letter-spacing: 1px;
   cursor: pointer;
   font-family: inherit;
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+/* Medium devices (tablets, 991px and down) */
+@media only screen and (max-width: 900px) {
+  .exam__body {
+    display: block;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .btn-next-submit {
+    height: 4rem;
+    padding: 0 2rem;
+    margin-top: 1.5rem;
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    border-radius: 0;
+  }
 }

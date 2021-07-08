@@ -29,7 +29,7 @@
 .exam__options-box {
   width: 80%;
   margin: 2rem auto 0 auto;
-  min-height: 30rem;
+  /* min-height: 30rem; */
   /* font-size: 1.4rem; */
 }
 
@@ -67,4 +67,61 @@
 
 .active {
   border: 1px solid #845ec2;
+}
+
+.btn-next-submit {
+  margin-top: 3rem;
+}
+
+/* Medium devices (tablets, 900px and down) */
+@media only screen and (max-width: 900px) {
+  .exam__question-container {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 3rem;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .exam__question-container {
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
+  .exam__question-text-box {
+    width: 95%;
+    background-color: inherit;
+    height: fit-content;
+    margin: 3rem 1rem 2rem 2rem;
+    padding: 0;
+  }
+
+  .exam__options {
+    width: 95%;
+  }
+
+  .exam__options-box {
+    margin: 0 0 0 2rem;
+    flex-direction: column;
+    width: fit-content;
+  }
+
+  .exam__question {
+    width: 95%;
+  }
+
+  .exam__question-no {
+    display: none;
+  }
+
+  .exam__option-label {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .text-area {
+    height: 10rem;
+    width: 95%;
+  }
 }

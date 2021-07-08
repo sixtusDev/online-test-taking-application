@@ -1,3 +1,4 @@
+// Import Statements
 import React, { Component } from "react";
 import { shuffle, confirmSubmit } from "../utils/helperFunctions";
 import Pagination from "./common/pagination";
@@ -18,28 +19,38 @@ class ExamPage extends Component {
     points: 0,
     currentAnswer: "",
     correctAnswers: [],
+    answers: {},
     questions: [],
     exam: {},
   };
 
   async componentDidMount() {
     this.setTime();
+    const examQuestions = JSON.parse(localStorage.getItem("questions"));
+    if (examQuestions) return this.setState({ questions: examQuestions });
+
+    if (this.state.questions.length > 0) return;
     const { courseCode, idNumber } = this.props.match.params;
-    console.log(courseCode, idNumber);
     const { data: exam } = await http.get(
       `${config.apiEndpoint}/exam/${courseCode}/${idNumber}`
     );
     const questions = shuffle(exam.questions, 20);
-    this.setState({ questions, exam });
+    localStorage.setItem("questions", JSON.stringify(questions));
+    this.setState({
+      questions,
+      exam,
+    });
   }
 
   CountDown() {
     if (this.state.examTime === 1000) {
-      // localStorage.setItem("Time", "Timed Up")
+      // localStorage.setItem("exam-time", "Timed Up");
+      localStorage.removeItem("exam-time");
       this.handleTimeOut();
     } else if (this.state.examTime > 0) {
       let countDown = this.state.examTime - 1000;
-      // localStorage.setItem("Time", JSON.stringify(countDown));
+
+      localStorage.setItem("exam-time", JSON.stringify(countDown));
       this.setState({ examTime: countDown });
     }
   }
@@ -64,8 +75,12 @@ class ExamPage extends Component {
   }
 
   setTime = () => {
-    const examTime =
-      Date.parse(new Date()) + 1000 * 60 * 30 - Date.parse(new Date());
+    let examTime = JSON.parse(localStorage.getItem("exam-time"));
+    if (!examTime)
+      examTime =
+        Date.parse(new Date()) +
+        1000 * 60 * this.state.exam.duration -
+        Date.parse(new Date());
     this.setState({ examTime });
     this.timer = setInterval(() => this.CountDown(), 1000);
     this.remainingTime();
@@ -75,12 +90,13 @@ class ExamPage extends Component {
     clearInterval(this.timer);
     this.setState({
       timeOut: true,
+      examTime: null,
     });
   };
 
   handlePageChange = (page) => {
     const { questions } = this.state;
-    this.setState({ currentPage: page });
+    this.setState({ currentPage: page, currentAnswer: "" });
     if (page === questions.length) {
       this.setState({ buttonLabel: "Submit" });
     } else {
@@ -90,7 +106,13 @@ class ExamPage extends Component {
 
   submit = async () => {
     const { courseCode, idNumber } = this.props.match.params;
-    const payload = { score: this.state.points };
+    const { correctAnswers, exam } = this.state;
+    const score = correctAnswers.length * exam.pointPerQuestion;
+    const payload = { score };
+    this.handleTimeOut();
+    localStorage.removeItem("exam-time");
+    localStorage.removeItem("questions");
+
     await http.post(
       `${config.apiEndpoint}/exam/score/${courseCode}/${idNumber}`,
       payload
@@ -99,10 +121,9 @@ class ExamPage extends Component {
   };
 
   handleNextAndSubmit = () => {
+    console.log(this.state.exam);
     // handles both next qestion action and submit exam action
-    const { currentPage, questions, correctAnswers } = this.state;
-    const totalPoints = correctAnswers.length * 2;
-    this.setState({ points: totalPoints });
+    const { currentPage, questions } = this.state;
     if (currentPage === questions.length) {
       return confirmSubmit(
         "Confirm Submit Exam",
@@ -126,10 +147,13 @@ class ExamPage extends Component {
     await this.setState({ currentAnswer: answer });
 
     let clonedCorrectAnswers = [...this.state.correctAnswers];
+    let clonedAnswers = { ...this.state.answers };
+    clonedAnswers[this.state.currentPage - 1] = answer;
+    console.log(clonedAnswers);
+    this.setState({ answers: clonedAnswers });
     const index = clonedCorrectAnswers.indexOf(correctAnswer);
     if (correctAnswer === answer) {
       if (index === -1) {
-        console.log(clonedCorrectAnswers);
         clonedCorrectAnswers = [...clonedCorrectAnswers, answer];
         return this.setState({ correctAnswers: clonedCorrectAnswers });
       }
@@ -149,12 +173,9 @@ class ExamPage extends Component {
       exam,
       buttonLabel,
       currentAnswer,
-      timeOut,
+      answers,
     } = this.state;
     const questions = paginate(allQuestions, currentPage, pageSize);
-    if (timeOut) {
-      this.submit();
-    }
     return (
       <div className="exam">
         <Header
@@ -167,6 +188,8 @@ class ExamPage extends Component {
             questions={questions}
             buttonLabel={buttonLabel}
             currentAnswer={currentAnswer}
+            answers={answers}
+            currentPage={currentPage}
             onAnswer={this.handleAnswer}
             onNextAndSubmit={this.handleNextAndSubmit}
           />
@@ -175,6 +198,7 @@ class ExamPage extends Component {
             itemsCount={count}
             pageSize={pageSize}
             currentPage={currentPage}
+            answers={answers}
             onPageChange={this.handlePageChange}
           />
         </div>
