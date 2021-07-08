@@ -7,11 +7,15 @@ const exam = require("./routes/exam");
 const error = require("./middleware/error");
 const app = express();
 
+// mongodb://localhost:27017/cbt
 mongoose
-  .connect("mongodb://localhost:27017/cbt", {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  })
+  .connect(
+    "mongodb+srv://sixtus:hariet@cluster0.b1aop.mongodb.net/CBT?retryWrites=true&w=majority",
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    }
+  )
   .then(() => console.log("Connected to mongodb"))
   .catch((err) => console.log("Could not connect to mongodb... ", err));
 

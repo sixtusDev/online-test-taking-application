@@ -2,6 +2,7 @@ const exams = [
   {
     duration: 30,
     totalPoints: 50,
+    questionQty: 20,
     pointPerQuestion: 2,
     instruction:
       "Your are required to attemp every question, avoid examination malpractice. Each question caries 2 marks.",

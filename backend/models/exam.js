@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const examSchema = new mongoose.Schema({
   duration: Number,
   totalPoints: Number,
+  questionQty: Number,
   instruction: {
     type: String,
     lowercase: true,
