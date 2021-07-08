@@ -1,5 +1,5 @@
 const express = require("express");
-const Joi = require("Joi");
+const Joi = require("joi");
 const Exam = require("../models/exam");
 const Course = require("../models/course");
 
