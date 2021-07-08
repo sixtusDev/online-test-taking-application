@@ -44,11 +44,6 @@ class ExamPage extends Component {
     this.setTime();
   }
 
-  componentDidUpdate() {
-    if (this.state.timeOut) {
-    }
-  }
-
   CountDown() {
     if (this.state.examTime === 1000) {
       // localStorage.setItem("exam-time", "Timed Up");
