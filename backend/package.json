@@ -18,5 +18,8 @@
     "mongoose": "^5.12.7",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.7"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

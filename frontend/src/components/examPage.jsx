@@ -18,34 +18,42 @@ class ExamPage extends Component {
     timeOut: false,
     points: 0,
     currentAnswer: "",
-    correctAnswers: [],
+    correctAnswers: {},
     answers: {},
     questions: [],
     exam: {},
   };
 
   async componentDidMount() {
-    this.setTime();
-    const examQuestions = JSON.parse(localStorage.getItem("questions"));
-    if (examQuestions) return this.setState({ questions: examQuestions });
-
-    if (this.state.questions.length > 0) return;
+    const examData = JSON.parse(localStorage.getItem("exam"));
+    if (examData) {
+      this.setTime();
+      return this.setState({ questions: examData.questions, exam: examData });
+    }
     const { courseCode, idNumber } = this.props.match.params;
     const { data: exam } = await http.get(
       `${config.apiEndpoint}/exam/${courseCode}/${idNumber}`
     );
-    const questions = shuffle(exam.questions, 20);
-    localStorage.setItem("questions", JSON.stringify(questions));
+    const questions = shuffle(exam.questions, exam.questionQty);
+    exam.questions = questions;
+    localStorage.setItem("exam", JSON.stringify(exam));
     this.setState({
       questions,
       exam,
     });
+    this.setTime();
+  }
+
+  componentDidUpdate() {
+    if (this.state.timeOut) {
+    }
   }
 
   CountDown() {
     if (this.state.examTime === 1000) {
       // localStorage.setItem("exam-time", "Timed Up");
       localStorage.removeItem("exam-time");
+      this.submit();
       this.handleTimeOut();
     } else if (this.state.examTime > 0) {
       let countDown = this.state.examTime - 1000;
@@ -75,11 +83,12 @@ class ExamPage extends Component {
   }
 
   setTime = () => {
+    const { duration } = this.state.exam;
     let examTime = JSON.parse(localStorage.getItem("exam-time"));
     if (!examTime)
       examTime =
         Date.parse(new Date()) +
-        1000 * 60 * this.state.exam.duration -
+        1000 * 60 * parseInt(duration) -
         Date.parse(new Date());
     this.setState({ examTime });
     this.timer = setInterval(() => this.CountDown(), 1000);
@@ -107,11 +116,11 @@ class ExamPage extends Component {
   submit = async () => {
     const { courseCode, idNumber } = this.props.match.params;
     const { correctAnswers, exam } = this.state;
-    const score = correctAnswers.length * exam.pointPerQuestion;
+    const score = Object.keys(correctAnswers).length * exam.pointPerQuestion;
     const payload = { score };
     this.handleTimeOut();
     localStorage.removeItem("exam-time");
-    localStorage.removeItem("questions");
+    localStorage.removeItem("exam");
 
     await http.post(
       `${config.apiEndpoint}/exam/score/${courseCode}/${idNumber}`,
@@ -121,7 +130,6 @@ class ExamPage extends Component {
   };
 
   handleNextAndSubmit = () => {
-    console.log(this.state.exam);
     // handles both next qestion action and submit exam action
     const { currentPage, questions } = this.state;
     if (currentPage === questions.length) {
@@ -146,21 +154,16 @@ class ExamPage extends Component {
     const correctAnswer = question.answer.toLowerCase();
     await this.setState({ currentAnswer: answer });
 
-    let clonedCorrectAnswers = [...this.state.correctAnswers];
+    let clonedCorrectAnswers = { ...this.state.correctAnswers };
     let clonedAnswers = { ...this.state.answers };
     clonedAnswers[this.state.currentPage - 1] = answer;
-    console.log(clonedAnswers);
     this.setState({ answers: clonedAnswers });
-    const index = clonedCorrectAnswers.indexOf(correctAnswer);
+    // const index = clonedCorrectAnswers.indexOf(correctAnswer);
     if (correctAnswer === answer) {
-      if (index === -1) {
-        clonedCorrectAnswers = [...clonedCorrectAnswers, answer];
-        return this.setState({ correctAnswers: clonedCorrectAnswers });
-      }
-    }
-    if (index >= 0) {
-      clonedCorrectAnswers.splice(index, 1);
-      this.setState({ correctAnswers: clonedCorrectAnswers });
+      clonedCorrectAnswers[this.state.currentPage - 1] = answer;
+      return this.setState({ correctAnswers: clonedCorrectAnswers });
+    } else {
+      delete clonedCorrectAnswers[this.state.currentPage - 1];
     }
   };
 
