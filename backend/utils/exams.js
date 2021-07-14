@@ -270,7 +270,7 @@ const exams = [
           "Implementation level",
           "All of the above",
         ],
-        answer: "Implentation level",
+        answer: "Implemtation level",
         questionType: "objective",
       },
       {

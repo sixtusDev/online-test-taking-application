@@ -6,8 +6,8 @@ export function shuffle(questions, quantity) {
 
 export function confirmSubmit(title, message, fn) {
   return confirmAlert({
-    title: "Confirm Submit Exam",
-    message: "Are you sure you want to submit?",
+    title,
+    message,
     buttons: [
       {
         label: "No",

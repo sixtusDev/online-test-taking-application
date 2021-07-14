@@ -154,7 +154,7 @@ class ExamPage extends Component {
     clonedAnswers[this.state.currentPage - 1] = answer;
     this.setState({ answers: clonedAnswers });
     // const index = clonedCorrectAnswers.indexOf(correctAnswer);
-    if (correctAnswer === answer) {
+    if (correctAnswer === answer.trim()) {
       clonedCorrectAnswers[this.state.currentPage - 1] = answer;
       return this.setState({ correctAnswers: clonedCorrectAnswers });
     } else {
