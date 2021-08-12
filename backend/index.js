@@ -10,7 +10,7 @@ const app = express();
 // mongodb://localhost:27017/cbt
 // mongodb+srv://sixtus:hariet@cluster0.b1aop.mongodb.net/CBT?retryWrites=true&w=majority
 mongoose
-  .connect("mongodb://localhost:27017/cbt", {
+  .connect("mongodb+srv://sixtus:hariet@cluster0.b1aop.mongodb.net/CBT?retryWrites=true&w=majority", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
