@@ -1,4 +1,4 @@
 {
-  "apiEndpoint": "https://online-exam-api.herokuapp.com/api",
+  "apiEndpoint": "https://online-test-taking-api.herokuapp.com/api",
   "dev": "http://localhost:5000/api"
 }
